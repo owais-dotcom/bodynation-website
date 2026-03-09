@@ -6,10 +6,14 @@ import type { GetStaticPaths } from 'astro';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const products = await getCollection('products');
-  return products.map(p => ({
-    params: { slug: p.data.slug },
-    props:  { product: p },
-  }));
+  return products
+    .filter(p => Boolean(p.slug))
+    .map(p => ({
+      // p.slug may be "whey-protein" or "products/whey-protein" depending on Astro version
+      // We always take just the last segment to match the [slug] param
+      params: { slug: p.slug.split('/').pop() as string },
+      props:  { product: p },
+    }));
 };
 
 const { product } = Astro.props;
