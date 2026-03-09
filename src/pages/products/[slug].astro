@@ -11,7 +11,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     .map(p => ({
       // p.slug may be "whey-protein" or "products/whey-protein" depending on Astro version
       // We always take just the last segment to match the [slug] param
-      params: { slug: p.slug.split('/').pop() as string },
+     params: { slug: p.slug.split('/').pop() },
       props:  { product: p },
     }));
 };
