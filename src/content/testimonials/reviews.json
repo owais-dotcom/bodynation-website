@@ -1,0 +1,34 @@
+[
+  {
+    "name": "Rahul S.",
+    "initials": "RS",
+    "location": "Gravity Fitness Club, Bibwewadi",
+    "text": "Authentic products and great guidance. Best supplement store in Bibwewadi. I've been buying here for over a year and never had a single authenticity issue.",
+    "rating": 5,
+    "order": 1
+  },
+  {
+    "name": "Priya D.",
+    "initials": "PD",
+    "location": "Fitness enthusiast, Pune",
+    "text": "Bought whey and creatine here, results have been amazing. The owner gives honest advice without pushing expensive stuff you don't need.",
+    "rating": 5,
+    "order": 2
+  },
+  {
+    "name": "Aniket M.",
+    "initials": "AM",
+    "location": "Gym member since 2023",
+    "text": "Always have sealed originals at competitive prices. WhatsApp ordering is so convenient — message and they have everything ready for pickup same day.",
+    "rating": 5,
+    "order": 3
+  },
+  {
+    "name": "Sneha K.",
+    "initials": "SK",
+    "location": "Marathon runner, Pune",
+    "text": "Got my ON Gold Standard whey at the best price in Bibwewadi. Super knowledgeable and helpful. My go-to store for every supplement purchase.",
+    "rating": 5,
+    "order": 4
+  }
+]

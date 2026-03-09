@@ -1,0 +1,67 @@
+---
+const features = [
+  { dot: 'bg-blue-700',   text: 'Sourced from verified, authorised distributors only' },
+  { dot: 'bg-orange-600', text: 'Every product batch-checked before going on sale' },
+  { dot: 'bg-green-600',  text: 'Personal guidance on the right supplement for your goal' },
+  { dot: 'bg-purple-600', text: 'Zero counterfeit products — absolute guarantee' },
+];
+
+const stats = [
+  { val: '5+',  label: 'Years in Business',  highlight: false },
+  { val: '50+', label: 'Brands Stocked',     highlight: true  },
+  { val: '500+',label: 'Happy Customers',    highlight: false },
+];
+---
+<section class="py-20 bg-slate-50" id="about">
+  <div class="wrap">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+      <!-- Left -->
+      <div class="rv-l">
+        <div class="sh-label">Why BodyNation</div>
+        <h2 class="sh-title">
+          Only <em class="not-italic text-orange-600">Genuine</em>.<br/>Always Verified.
+        </h2>
+        <p class="text-base text-slate-500 leading-relaxed mb-4">
+          At BodyNation, we understand how critical it is to consume authentic supplements. Every product we carry is sourced directly from authorised distributors — never grey-market or third-party resellers.
+        </p>
+        <p class="text-base text-slate-500 leading-relaxed mb-8">
+          Our store is trusted by hundreds of Pune gym-goers who've experienced the real difference that genuine supplements make.
+        </p>
+
+        <ul class="flex flex-col gap-3">
+          {features.map(f => (
+            <li class="flex items-center gap-3 bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:border-slate-300 hover:shadow-brand-sm hover:translate-x-1 transition-all duration-200">
+              <span class:list={['w-2 h-2 rounded-full flex-shrink-0', f.dot]}></span>
+              {f.text}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Right: Stat cards -->
+      <div class="rv-r">
+        <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-4">
+          {stats.map(s => (
+            <div class:list={[
+              'rounded-2xl p-8 text-center border hover:-translate-y-1 transition-all duration-300',
+              s.highlight
+                ? 'bg-gradient-to-br from-blue-800 to-blue-700 border-transparent shadow-brand-lg'
+                : 'bg-white border-slate-200 hover:shadow-brand-md'
+            ]}>
+              <div class:list={[
+                'text-5xl font-black tracking-tight leading-none mb-2',
+                s.highlight ? 'text-white' : 'text-blue-800'
+              ]}>{s.val}</div>
+              <div class:list={[
+                'text-xs font-bold tracking-widest uppercase',
+                s.highlight ? 'text-blue-200' : 'text-slate-400'
+              ]}>{s.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

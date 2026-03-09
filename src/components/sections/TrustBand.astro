@@ -1,0 +1,64 @@
+---
+const cards = [
+  {
+    icon: '✅',
+    title: '100% Authentic',
+    text:  'Sourced directly from authorised distributors. No grey-market products, ever.',
+    accent: 'blue',
+  },
+  {
+    icon: '🏅',
+    title: 'Verified Distributors',
+    text:  'Direct relationships with brand-authorised supply chains across India.',
+    accent: 'orange',
+  },
+  {
+    icon: '💪',
+    title: 'Gym Community Trust',
+    text:  'Over 500 loyal customers from Bibwewadi gyms and surrounding areas.',
+    accent: 'green',
+  },
+  {
+    icon: '📦',
+    title: 'Sealed Packaging',
+    text:  'Every product batch-checked and sold in intact manufacturer-sealed packaging.',
+    accent: 'purple',
+  },
+];
+
+const accentMap: Record<string, { bg: string; bar: string; iconBg: string }> = {
+  blue:   { bg: '',       bar: 'from-blue-700 to-blue-500',   iconBg: 'bg-blue-50'   },
+  orange: { bg: '',       bar: 'from-orange-600 to-orange-400', iconBg: 'bg-orange-50' },
+  green:  { bg: '',       bar: 'from-green-600 to-green-400',  iconBg: 'bg-green-50'  },
+  purple: { bg: '',       bar: 'from-purple-600 to-purple-400', iconBg: 'bg-purple-50' },
+};
+---
+<section class="py-16 bg-slate-50 border-y border-slate-200">
+  <div class="wrap">
+    <div class="text-center mb-10 rv">
+      <div class="sh-label justify-center">Why Choose Us</div>
+      <h2 class="sh-title">Built on Trust &amp; Authenticity</h2>
+      <p class="sh-sub mx-auto">Every product goes through rigorous authenticity checks before it reaches you.</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {cards.map(card => {
+        const a = accentMap[card.accent];
+        return (
+          <div class="rv group bg-white border border-slate-200 rounded-2xl p-6 flex gap-4 items-start relative overflow-hidden hover:-translate-y-1 hover:shadow-brand-md transition-all duration-300">
+            <!-- Bottom accent bar -->
+            <div class={`absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r ${a.bar} scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left`}></div>
+
+            <div class={`w-12 h-12 rounded-xl flex items-center justify-center text-2xl flex-shrink-0 ${a.iconBg}`}>
+              {card.icon}
+            </div>
+            <div>
+              <h3 class="text-sm font-bold text-slate-900 mb-1">{card.title}</h3>
+              <p class="text-xs text-slate-500 leading-relaxed">{card.text}</p>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,176 @@
+---
+import { waLink } from '@/utils/whatsapp';
+
+const navLinks = [
+  { href: '/',          label: 'Home' },
+  { href: '/products',  label: 'Shop', hasDropdown: true },
+  { href: '/offers',    label: 'Offers' },
+  { href: '/about',     label: 'About' },
+  { href: '/contact',   label: 'Contact' },
+];
+
+const shopLinks = [
+  { href: '/products?cat=protein',     label: 'Whey Protein',  dot: '#1a3a8f' },
+  { href: '/products?cat=creatine',    label: 'Creatine',      dot: '#e8620a' },
+  { href: '/products?cat=mass-gainer', label: 'Mass Gainers',  dot: '#9333ea' },
+  { href: '/products?cat=pre-workout', label: 'Pre Workout',   dot: '#16a34a' },
+  { href: '/products?cat=vitamins',    label: 'Vitamins',      dot: '#0891b2' },
+  { href: '/products?cat=fat-burner',  label: 'Fat Burners',   dot: '#dc2626' },
+];
+
+const currentPath = Astro.url.pathname;
+const waUrl = waLink('Hi Akash, I want to order supplements from BodyNation.');
+---
+
+<header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4">
+  <div class="wrap flex items-center justify-between gap-4">
+
+    <!-- Logo -->
+    <a href="/" class="flex items-center gap-3 flex-shrink-0 group" aria-label="BodyNation Home">
+      <img
+        src="/images/logo.svg"
+        alt="BodyNation Sports & Nutrition"
+        width="52"
+        height="52"
+        class="w-12 h-12 object-contain rounded-xl transition-transform duration-200 group-hover:scale-105"
+      />
+      <div class="flex flex-col leading-none">
+        <span class="text-xl font-black tracking-tight leading-none">
+          <span class="text-blue-800">BODY</span><span class="text-orange-600">NATION</span>
+        </span>
+        <span class="text-[0.5rem] font-semibold tracking-[0.18em] uppercase text-slate-400 mt-0.5">
+          Sports &amp; Nutrition
+        </span>
+      </div>
+    </a>
+
+    <!-- Desktop Nav -->
+    <nav class="hidden lg:flex items-center gap-0.5" aria-label="Main navigation">
+      {navLinks.map(link => (
+        link.hasDropdown ? (
+          <div class="relative group">
+            <a
+              href={link.href}
+              class:list={[
+                'flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200',
+                currentPath.startsWith('/products')
+                  ? 'text-blue-800 bg-blue-50'
+                  : 'text-slate-600 hover:text-blue-800 hover:bg-blue-50'
+              ]}
+            >
+              {link.label}
+              <svg class="w-3.5 h-3.5 transition-transform duration-200 group-hover:rotate-180" viewBox="0 0 12 12" fill="none">
+                <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+            <!-- Dropdown -->
+            <div class="absolute top-full left-0 mt-2 w-52 bg-white border border-slate-200 rounded-2xl p-2 shadow-brand-lg opacity-0 invisible -translate-y-1.5 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200 z-50">
+              {shopLinks.map(s => (
+                <a href={s.href} class="flex items-center gap-2.5 px-3.5 py-2.5 text-sm font-medium text-slate-500 rounded-xl hover:text-blue-800 hover:bg-blue-50 transition-all duration-150">
+                  <span class="w-2 h-2 rounded-full flex-shrink-0" style={`background:${s.dot}`}></span>
+                  {s.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <a
+            href={link.href}
+            class:list={[
+              'px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200',
+              currentPath === link.href
+                ? 'text-blue-800 bg-blue-50'
+                : 'text-slate-600 hover:text-blue-800 hover:bg-blue-50'
+            ]}
+          >
+            {link.label}
+          </a>
+        )
+      ))}
+    </nav>
+
+    <!-- Right CTAs -->
+    <div class="flex items-center gap-2 flex-shrink-0">
+      <a href={waUrl} target="_blank" rel="noopener" class="btn-wa btn-sm hidden sm:inline-flex">
+        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        Order
+      </a>
+
+      <!-- Hamburger -->
+      <button id="ham-btn" class="lg:hidden flex flex-col gap-1.5 items-center justify-center w-10 h-10 rounded-xl bg-slate-100 border border-slate-200 transition-all duration-200 hover:bg-slate-200" aria-label="Open menu" aria-expanded="false">
+        <span class="ham-line w-5 h-0.5 bg-slate-700 rounded-full transition-all duration-300 block"></span>
+        <span class="ham-line w-5 h-0.5 bg-slate-700 rounded-full transition-all duration-300 block"></span>
+        <span class="ham-line w-5 h-0.5 bg-slate-700 rounded-full transition-all duration-300 block"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Overlay -->
+<div id="mob-menu" class="fixed inset-0 z-40 bg-white/98 backdrop-blur-xl flex flex-col px-6 py-24 overflow-y-auto opacity-0 invisible transition-all duration-250 lg:hidden" aria-hidden="true">
+  <button id="mob-close" class="absolute top-5 right-5 w-10 h-10 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-500 text-lg hover:bg-slate-200 transition-all" aria-label="Close menu">✕</button>
+
+  <nav class="flex flex-col gap-1 w-full" aria-label="Mobile navigation">
+    <a href="/"         class="mob-link text-xl font-bold text-slate-800 px-4 py-3.5 rounded-2xl hover:bg-blue-50 hover:text-blue-800 transition-all">Home</a>
+    <div class="h-px bg-slate-100 my-1"></div>
+    <a href="/products" class="mob-link text-xl font-bold text-slate-800 px-4 py-3.5 rounded-2xl hover:bg-blue-50 hover:text-blue-800 transition-all">Shop All Products</a>
+    {shopLinks.map(s => (
+      <a href={s.href} class="mob-link text-base font-medium text-slate-500 pl-9 pr-4 py-2.5 rounded-2xl hover:bg-blue-50 hover:text-blue-800 transition-all">
+        ↳ {s.label}
+      </a>
+    ))}
+    <div class="h-px bg-slate-100 my-1"></div>
+    <a href="/offers"  class="mob-link text-xl font-bold text-slate-800 px-4 py-3.5 rounded-2xl hover:bg-blue-50 hover:text-blue-800 transition-all">Offers</a>
+    <a href="/about"   class="mob-link text-xl font-bold text-slate-800 px-4 py-3.5 rounded-2xl hover:bg-blue-50 hover:text-blue-800 transition-all">About</a>
+    <a href="/contact" class="mob-link text-xl font-bold text-slate-800 px-4 py-3.5 rounded-2xl hover:bg-blue-50 hover:text-blue-800 transition-all">Contact</a>
+    <div class="h-px bg-slate-100 my-1"></div>
+    <a href={waUrl} target="_blank" rel="noopener" class="mob-link text-xl font-bold text-[#25d366] px-4 py-3.5 rounded-2xl hover:bg-green-50 transition-all">
+      💬 Order on WhatsApp
+    </a>
+  </nav>
+</div>
+
+<script>
+  // ── Navbar scroll solidify ──
+  const navbar = document.getElementById('navbar')!;
+  const onScroll = () => {
+    if (window.scrollY > 20) {
+      navbar.classList.add('bg-white/95', 'backdrop-blur-xl', 'border-b', 'border-slate-200', 'shadow-brand-sm', 'py-2');
+      navbar.classList.remove('py-4');
+    } else {
+      navbar.classList.remove('bg-white/95', 'backdrop-blur-xl', 'border-b', 'border-slate-200', 'shadow-brand-sm', 'py-2');
+      navbar.classList.add('py-4');
+    }
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // ── Mobile menu ──
+  const hamBtn   = document.getElementById('ham-btn')!;
+  const mobMenu  = document.getElementById('mob-menu')!;
+  const mobClose = document.getElementById('mob-close')!;
+  const mobLinks = document.querySelectorAll('.mob-link');
+
+  const openMenu = () => {
+    mobMenu.classList.remove('opacity-0', 'invisible');
+    mobMenu.classList.add('opacity-100', 'visible');
+    mobMenu.setAttribute('aria-hidden', 'false');
+    hamBtn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  };
+  const closeMenu = () => {
+    mobMenu.classList.add('opacity-0', 'invisible');
+    mobMenu.classList.remove('opacity-100', 'visible');
+    mobMenu.setAttribute('aria-hidden', 'true');
+    hamBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  };
+
+  hamBtn.addEventListener('click', () =>
+    mobMenu.classList.contains('opacity-100') ? closeMenu() : openMenu()
+  );
+  mobClose.addEventListener('click', closeMenu);
+  mobLinks.forEach(l => l.addEventListener('click', closeMenu));
+</script>

@@ -1,0 +1,55 @@
+---
+import SEOHead from '@/components/layout/SEOHead.astro';
+import Navbar from '@/components/layout/Navbar.astro';
+import Footer from '@/components/layout/Footer.astro';
+import WhatsAppFAB from '@/components/ui/WhatsAppFAB.astro';
+import '@/styles/global.css';
+
+interface Props {
+  title?:       string;
+  description?: string;
+  image?:       string;
+  canonical?:   string;
+  noindex?:     boolean;
+}
+
+const { title, description, image, canonical, noindex } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <SEOHead {title} {description} {image} {canonical} {noindex} />
+</head>
+<body>
+  <Navbar />
+  <main>
+    <slot />
+  </main>
+  <Footer />
+  <WhatsAppFAB />
+
+  <!-- Global scroll-reveal observer -->
+  <script>
+    const revealEls = document.querySelectorAll('.rv, .rv-l, .rv-r');
+    if (revealEls.length) {
+      const obs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            // stagger siblings
+            const parent = entry.target.parentElement;
+            const pending = parent
+              ? [...parent.querySelectorAll<HTMLElement>('.rv:not(.vis),.rv-l:not(.vis),.rv-r:not(.vis)')]
+              : [];
+            const idx = pending.indexOf(entry.target as HTMLElement);
+            setTimeout(() => entry.target.classList.add('vis'), Math.max(0, idx) * 80);
+            obs.unobserve(entry.target);
+          });
+        },
+        { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+      );
+      revealEls.forEach((el) => obs.observe(el));
+    }
+  </script>
+</body>
+</html>

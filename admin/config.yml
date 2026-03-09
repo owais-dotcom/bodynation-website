@@ -1,0 +1,96 @@
+# Decap CMS Configuration for BodyNation
+# Docs: https://decapcms.org/docs/
+
+backend:
+  name: git-gateway
+  branch: main
+
+# Where uploaded media files go
+media_folder: "public/images/products"
+public_folder: "/images/products"
+
+# Site URL for previews
+site_url: https://bodynation.in
+
+collections:
+
+  # ── Products ────────────────────────────────────────
+  - name: "products"
+    label: "Products"
+    label_singular: "Product"
+    folder: "src/content/products"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: name
+    summary: "{{name}} – ₹{{price}}"
+    sortable_fields: ["order", "name", "price"]
+    view_filters:
+      - label: "In Stock"
+        field: inStock
+        pattern: true
+      - label: "Featured"
+        field: featured
+        pattern: true
+    fields:
+      - { label: "Product Name",   name: "name",     widget: "string" }
+      - { label: "URL Slug",       name: "slug",     widget: "string",
+          hint: "URL-friendly ID, e.g. whey-protein" }
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options:
+          - { label: "Whey Protein",  value: "protein"     }
+          - { label: "Creatine",      value: "creatine"    }
+          - { label: "Mass Gainer",   value: "mass-gainer" }
+          - { label: "Pre Workout",   value: "pre-workout" }
+          - { label: "Vitamins",      value: "vitamins"    }
+          - { label: "Fat Burner",    value: "fat-burner"  }
+      - { label: "Brand",          name: "brand",    widget: "string" }
+      - { label: "Price (₹)",      name: "price",    widget: "number", value_type: "int" }
+      - { label: "Price Label",    name: "priceLabel", widget: "string", required: false,
+          hint: 'e.g. "Starting ₹2,499" — leave blank to auto-format' }
+      - { label: "Badge Text",     name: "badge",    widget: "string", required: false,
+          hint: 'e.g. "Best Seller", "New", "Popular"' }
+      - label: "Badge Colour"
+        name: "badgeColor"
+        widget: "select"
+        required: false
+        default: "orange"
+        options: ["orange", "blue", "green"]
+      - { label: "Product Image",  name: "image",    widget: "image" }
+      - { label: "Key Benefit",    name: "benefit",  widget: "string",
+          hint: "One line shown on the product card" }
+      - { label: "WhatsApp Message", name: "whatsappMsg", widget: "string",
+          hint: "Pre-filled message when customer clicks Order" }
+      - { label: "In Stock?",      name: "inStock",  widget: "boolean", default: true }
+      - { label: "Featured (show on homepage)?", name: "featured", widget: "boolean", default: false }
+      - { label: "Sort Order",     name: "order",    widget: "number", default: 99,
+          hint: "Lower number = shown first" }
+      - { label: "Product Description", name: "body", widget: "markdown" }
+
+  # ── Offers / Bundles ────────────────────────────────
+  - name: "offers"
+    label: "Offers & Bundles"
+    label_singular: "Offer"
+    folder: "src/content/offers"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: title
+    summary: "{{title}} – ₹{{salePrice}}"
+    fields:
+      - { label: "Offer Title",    name: "title",     widget: "string" }
+      - { label: "Tag Line",       name: "tag",       widget: "string",
+          hint: 'e.g. "Most Popular", "Limited Time"' }
+      - { label: "Tag Emoji",      name: "tagEmoji",  widget: "string", required: false }
+      - { label: "Original Price", name: "originalPrice", widget: "number", value_type: "int" }
+      - { label: "Sale Price",     name: "salePrice", widget: "number", value_type: "int" }
+      - label: "Items Included"
+        name: "items"
+        widget: "list"
+        hint: "One item per line"
+        field: { label: "Item", name: "item", widget: "string" }
+      - { label: "WhatsApp Message", name: "whatsappMsg", widget: "string" }
+      - { label: "Featured (orange accent)?", name: "featured", widget: "boolean", default: false }
+      - { label: "Active?",        name: "active",    widget: "boolean", default: true }
+      - { label: "Sort Order",     name: "order",     widget: "number", default: 99 }
+      - { label: "Description",    name: "body",      widget: "markdown", required: false }

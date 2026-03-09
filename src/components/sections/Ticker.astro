@@ -1,0 +1,36 @@
+---
+const items = [
+  '🏋️ Whey Protein',
+  '⚡ Creatine Monohydrate',
+  '💥 Pre Workout',
+  '🔥 Fat Burners',
+  '📦 Mass Gainers',
+  '💊 Vitamins & Minerals',
+  '✅ 100% Genuine',
+  '📍 Bibwewadi, Pune',
+  '🏋️ Whey Protein',
+  '⚡ Creatine Monohydrate',
+  '💥 Pre Workout',
+  '🔥 Fat Burners',
+  '📦 Mass Gainers',
+  '💊 Vitamins & Minerals',
+  '✅ 100% Genuine',
+  '📍 Bibwewadi, Pune',
+];
+---
+<div class="bg-blue-800 py-4 overflow-hidden relative">
+  <!-- Fade edges -->
+  <div class="absolute left-0 top-0 bottom-0 w-16 z-10 pointer-events-none"
+    style="background:linear-gradient(90deg,#1a3a8f,transparent)"></div>
+  <div class="absolute right-0 top-0 bottom-0 w-16 z-10 pointer-events-none"
+    style="background:linear-gradient(-90deg,#1a3a8f,transparent)"></div>
+
+  <div class="ticker-track">
+    {items.map(item => (
+      <span class="flex items-center gap-2 px-8 text-xs font-bold tracking-widest uppercase text-white/90 whitespace-nowrap">
+        {item}
+        <span class="w-1 h-1 rounded-full bg-orange-500 flex-shrink-0"></span>
+      </span>
+    ))}
+  </div>
+</div>

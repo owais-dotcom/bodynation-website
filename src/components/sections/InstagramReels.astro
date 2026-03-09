@@ -1,0 +1,63 @@
+---
+// Add your real Instagram reel URLs here.
+// To embed: on Instagram open the reel → ··· → Embed → paste the blockquote+script into the slot below.
+const reelSlots = [
+  { id: 1, placeholder: true },
+  { id: 2, placeholder: true },
+  { id: 3, placeholder: true },
+];
+---
+<section class="py-20 bg-white" id="reels">
+  <div class="wrap">
+    <div class="flex items-end justify-between flex-wrap gap-4 mb-10">
+      <div class="rv">
+        <div class="sh-label">Follow Us</div>
+        <h2 class="sh-title">Instagram Reels</h2>
+        <p class="sh-sub">Watch our latest content, product reviews and gym guides.</p>
+      </div>
+      <a
+        href="https://instagram.com/bodynation_protein_shop"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="rv inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold text-white transition-all duration-200 hover:-translate-y-0.5"
+        style="background: linear-gradient(135deg, #f97316, #ec4899 50%, #a855f7); box-shadow: 0 4px 16px rgba(236,72,153,0.3)"
+      >
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="2" width="20" height="20" rx="5"/>
+          <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+        </svg>
+        @bodynation_protein_shop
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {reelSlots.map(slot => (
+        <div class="rv relative rounded-2xl overflow-hidden border border-slate-200 bg-slate-50" style="aspect-ratio:9/16;max-height:520px">
+          {slot.placeholder ? (
+            <!-- ── PLACEHOLDER: Replace this entire div with your Instagram embed code ── -->
+            <div class="w-full h-full min-h-80 flex flex-col items-center justify-center gap-4 p-6 text-center">
+              <div class="w-14 h-14 rounded-full flex items-center justify-center text-white text-xl"
+                style="background:linear-gradient(135deg,#f97316,#ec4899)">▶</div>
+              <p class="text-sm font-bold text-slate-600">Reel {slot.id} — Paste embed here</p>
+              <p class="text-xs text-slate-400 leading-relaxed max-w-[200px]">
+                Go to your Instagram reel → ··· → Embed → copy the code → paste it here replacing this placeholder div
+              </p>
+              <code class="text-[0.65rem] bg-slate-200 text-slate-500 px-2 py-1 rounded-lg">instagram.com/reel/YOUR_ID/</code>
+            </div>
+          ) : (
+            <slot />
+          )}
+        </div>
+      ))}
+    </div>
+
+    <!-- How-to note -->
+    <div class="rv mt-6 flex gap-3 items-start bg-blue-50 border border-blue-100 rounded-2xl p-5">
+      <span class="text-xl flex-shrink-0 mt-0.5">ℹ️</span>
+      <p class="text-sm text-blue-800 leading-relaxed">
+        <strong>How to embed reels:</strong> Open any reel on Instagram → tap <strong>···</strong> → <strong>Embed</strong> → copy the code → paste it inside the matching reel slot div in <code class="bg-blue-100 px-1 py-0.5 rounded text-xs">src/components/sections/InstagramReels.astro</code>, replacing the placeholder content.
+      </p>
+    </div>
+  </div>
+</section>
